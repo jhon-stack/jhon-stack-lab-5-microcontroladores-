@@ -10,5 +10,4 @@ Alex Varela Quiros  B26918
 
 STM32/Arduino: GPIO, Giroscopio, comunicaciones, TinyML
 
-III-2022
 ---
