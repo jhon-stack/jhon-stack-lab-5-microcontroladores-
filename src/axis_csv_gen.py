@@ -39,6 +39,7 @@ with open(csv_path, mode ='w') as csv_file:
     y = float(data[2])
     z = float(data[3])
     writer.writerow([timestamp, x, y, z])
+    #Con fines de debug
     print(f"Timestamp: {timestamp}, X: {x}, Y: {y}, Z: {z}")
     cnt += 1
     if cnt >= muestras:
