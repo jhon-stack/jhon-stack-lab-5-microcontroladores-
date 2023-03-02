@@ -13,32 +13,33 @@ anteriormente
 
 void setup() {
   Serial.begin(9600);
-	while (!Serial);
-	//Serial.println("Started");
+  while (!Serial);
   if (!IMU.begin()) {
-    //Serial.println("Failed to initialize IMU!");
 		while (1);
-	}
-	//Serial.print("Gyroscope sample rate = ");
-	//Serial.print(IMU.gyroscopeSampleRate());
-	//Serial.println(" Hz");
-	//Serial.println();
-	//Serial.println("Gyroscope in degrees/second");
-	//Serial.println("\tTimestamp\tX\tY\tZ");
+  }
+
 }
 
 void loop() {
-  float x, y, z;
+	float ax, ay, az;
+  	float gx, gy, gz;
 	unsigned long timestamp = millis();
-	if (IMU.gyroscopeAvailable()) {
-    IMU.readGyroscope(x, y, z);
-		//Serial.print('\t');    
-		Serial.print(timestamp/1000.00);
+  	//Agarramos los dos el giroscopio y el acelerometro
+	if (IMU.gyroscopeAvailable() && IMU.accelerationAvailable() ) {
+		IMU.readAcceleration(ax, ay, az);
+    	IMU.readGyroscope(gx, gy, gz);
+    	Serial.print('\t');    
+		Serial.print(ax);
+		Serial.print('\t');
+		Serial.print(ay);
+		Serial.print('\t');
+		Serial.print(az);
 		Serial.print('\t');    
-		Serial.print(x);
+		Serial.print(gx);
 		Serial.print('\t');
-		Serial.print(y);
+		Serial.print(gy);
 		Serial.print('\t');
-		Serial.println(z);
+		Serial.println(gz);
 	}
 }
+
