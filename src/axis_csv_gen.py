@@ -15,10 +15,10 @@ current_directory = os.getcwd()
 '''
   1. Mover el brazo hacia arriba    ->  circular.csv
   2. Mover el brazo hacia abajo     ->  flexion.csv
-  3. Mover el brazo hacia al frente ->  izquierda_derecha.csv
+  3. Mover el brazo hacia al frente ->  flexion.csv
 '''
 #Asegurarse que el dump file quede dentro del mismo dir
-csv_path = os.path.join(current_directory, "izquierda_derecha.csv")
+csv_path = os.path.join(current_directory, "flexion.csv")
 #pequena tabla para ver la duracion de las interaciones
 '''
 Iteraciones   tiempo(s)
@@ -27,20 +27,22 @@ Iteraciones   tiempo(s)
 '''
 with open(csv_path, mode ='w') as csv_file:
   writer = csv.writer(csv_file)
-  writer.writerow(['timestamp', 'X', 'Y', 'Z'])
+  writer.writerow(['aX', 'aY', 'aZ', 'gX', 'gY', 'gZ'])
   #cambiar el valor muestras por el valor de muestras que se desean
   muestras = 1000
   cnt = 0
   while True:
     line = ser.readline().decode().strip()
     data = line.split('\t')
-    timestamp = float(data[0])
-    x = float(data[1])
-    y = float(data[2])
-    z = float(data[3])
-    writer.writerow([timestamp, x, y, z])
+    ax = float(data[0])
+    ay = float(data[1])
+    az = float(data[2])
+    gx = float(data[3])
+    gy = float(data[4])
+    gz = float(data[5])
+    writer.writerow([ ax, ay, az, gx, gy, gz])
     #Con fines de debug
-    print(f"Timestamp: {timestamp}, X: {x}, Y: {y}, Z: {z}")
+    print(f"aX: {ax}, aY: {ay}, aZ: {az}, gX: {gx}, gY: {gy}, gZ: {gz}")
     cnt += 1
     if cnt >= muestras:
       break
